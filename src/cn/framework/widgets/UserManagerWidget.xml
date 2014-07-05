@@ -1,0 +1,13 @@
+<?xml version="1.0" ?>
+<configuration>
+    <tree label="后台管理">
+        <node label="用户管理"  icon="assets/18x18/application_double.gif"  table="SYS_USER_1"  column="用户名:real_name;登录名:login_name;电子邮箱:email;联系方式:mobile" formtype="flex" formXML="cn/framework/widgets/UserManager/formXML/UserForm.xml" select="SYS_USER_2" update="SYS_USER_4" insert="SYS_USER_3" del="SYS_USER_5">
+        </node>
+        <node label="日志监控"  icon="assets/18x18/application_double.gif"  table="SYS_RZJK"  column="IP地址:ip;访问时间:createtime;操作:cz" formtype="flex" formXML="" >
+        </node>
+        <node label="数据管理" icon="assets/18x18/application_cascade.gif" clickable="false">
+            <node label="水库" icon="assets/18x18/application_view_gallery.gif"  table="SK_11"  column="水库名称:gcmc;行政区:xzq;除险加固实施年份:cxjgssnf;X坐标:x;Y坐标:y" formtype="flex"  formXML="cn/framework/widgets/UserManager/formXML/SKForm.xml" select="SK_12" update="SK_14" insert="SK_13" del="SK_15"/>
+        </node>
+
+    </tree>
+</configuration>

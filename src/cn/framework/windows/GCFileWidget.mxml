@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:TitleWindow xmlns:fx="http://ns.adobe.com/mxml/2009" 
+				xmlns:s="library://ns.adobe.com/flex/spark"  fontSize="12"
+				xmlns:mx="library://ns.adobe.com/flex/mx" layout="absolute" width="800" height="500" showCloseButton="true" close="PopUpManager.removePopUp(this);">
+	<fx:Script>
+		<![CDATA[
+			import mx.managers.PopUpManager;
+			[Bindable]
+			public var bindingObj:Object;
+		]]>
+	</fx:Script>
+	<fx:Declarations>
+		<!-- 将非可视元素（例如服务、值对象）放在此处 -->
+	</fx:Declarations>
+	<mx:Label x="14" y="20" text="工程名称"/>
+	<s:TextInput x="75" y="19" width="394" text="@{bindingObj.name}"/>
+	<mx:TabNavigator x="20" y="49" width="747" height="393">
+		<s:NavigatorContent label="管理文件">
+			<mx:DataGrid  width="100%" height="100%">
+				<mx:columns>
+					<mx:DataGridColumn headerText="文件名" dataField="name"/>
+					<mx:DataGridColumn headerText="文件编号" dataField="wh"/>
+					<mx:DataGridColumn headerText="发文日期" dataField="fwrq"/>
+					<mx:DataGridColumn width="70" headerText="操作">
+						<mx:itemRenderer>
+							<fx:Component>
+								<mx:Button label="打开" click="open(data.url)">
+									<fx:Script>
+										<![CDATA[
+											import cn.framework.utils.OpenWindow;
+											public function open(url:String):void
+											{
+//												navigateToURL(new URLRequest(url),"_blank");	
+												OpenWindow.openWindow(url,"_blank");
+											}
+										]]>
+									</fx:Script>
+								</mx:Button>
+								
+							</fx:Component>
+						</mx:itemRenderer>
+					</mx:DataGridColumn>
+				</mx:columns>
+				<mx:dataProvider>
+					<fx:Array>
+						<fx:Object name="合同文件" wh="穗水**号" fwrq="2014-03-29" url="assets/other/hetong.doc"/>
+						<fx:Object name="开工报告" wh="穗水**号" fwrq="2014-06-29" url="assets/other/kaigong.doc"/>
+					</fx:Array>
+				</mx:dataProvider>
+			</mx:DataGrid>
+		</s:NavigatorContent>
+		<s:NavigatorContent label="施工文件" width="100%" height="100%">
+			<mx:DataGrid  width="100%" height="100%">
+				<mx:columns>
+					<mx:DataGridColumn headerText="文件名" dataField="name" />
+					<mx:DataGridColumn headerText="文号" dataField="wh"/>
+					<mx:DataGridColumn headerText="发文日期" dataField="fwrq"/>
+					<mx:DataGridColumn width="70" headerText="操作">
+						<mx:itemRenderer>
+							<fx:Component>
+								<mx:Button label="打开" click="open(data.url)">
+									<fx:Script>
+										<![CDATA[
+											import cn.framework.utils.OpenWindow;
+											public function open(url:String):void
+											{
+												OpenWindow.openWindow(url,"_blank");
+											}
+										]]>
+									</fx:Script>
+								</mx:Button>
+								
+							</fx:Component>
+						</mx:itemRenderer>
+					</mx:DataGridColumn>
+				</mx:columns>
+				<mx:dataProvider>
+					<fx:Array>
+						<fx:Object name="设计变更" wh="穗水**号" fwrq="2014-03-29" url="assets/other/biangeng.doc"/>
+						<fx:Object name="地址勘探和土(岩)试验报告" wh="穗水**号" fwrq="2014-03-29" url="assets/other/kaigong.doc"/>
+						<fx:Object name="施工计划" wh="穗水**号" fwrq="2014-06-29" url="assets/other/kaigong.doc"/>
+						<fx:Object name="竣工图" wh="穗水**号" fwrq="2014-06-29" url="cadviewer.html"/>
+					</fx:Array>
+				</mx:dataProvider>
+			</mx:DataGrid>
+		</s:NavigatorContent>
+		<s:NavigatorContent label="验收文件" width="100%" height="100%">
+			<mx:DataGrid  width="100%" height="100%">
+				<mx:columns>
+					<mx:DataGridColumn headerText="文件名" dataField="name"/>
+					<mx:DataGridColumn headerText="文号" dataField="wh"/>
+					<mx:DataGridColumn headerText="发文日期" dataField="fwrq"/>
+					<mx:DataGridColumn width="70" headerText="操作">
+						<mx:itemRenderer>
+							<fx:Component>
+								<mx:Button label="打开" click="open(data.url)">
+									<fx:Script>
+										<![CDATA[
+											import cn.framework.utils.OpenWindow;
+											public function open(url:String):void
+											{
+												OpenWindow.openWindow(url,"_blank");
+											}
+										]]>
+									</fx:Script>
+								</mx:Button>
+								
+							</fx:Component>
+						</mx:itemRenderer>
+					</mx:DataGridColumn>
+				</mx:columns>
+				<mx:dataProvider>
+					<fx:Array>
+						<fx:Object name="验收申请" wh="穗水**号" fwrq="2014-03-29" url="assets/other/yanshou.doc"/>
+						<fx:Object name="设计报告" wh="穗水**号" fwrq="2014-03-29" url="assets/other/kaigong.doc"/>
+						<fx:Object name="监理报告" wh="穗水**号" fwrq="2014-03-29" url="assets/other/jianli.doc"/>
+						<fx:Object name="验收报告" wh="穗水**号" fwrq="2014-06-29" url="assets/other/baogao.doc"/>
+					</fx:Array>
+				</mx:dataProvider>
+			</mx:DataGrid>
+		</s:NavigatorContent>
+		<s:NavigatorContent label="监理文件" width="100%" height="100%">
+			<mx:DataGrid  width="100%" height="100%">
+				<mx:columns>
+					<mx:DataGridColumn headerText="文件名" dataField="name"/>
+					<mx:DataGridColumn headerText="文号" dataField="wh"/>
+					<mx:DataGridColumn headerText="发文日期" dataField="fwrq"/>
+					<mx:DataGridColumn width="70" headerText="操作">
+						<mx:itemRenderer>
+							<fx:Component>
+								<mx:Button label="打开" click="open(data.url)">
+									<fx:Script>
+										<![CDATA[
+											import cn.framework.utils.OpenWindow;
+											public function open(url:String):void
+											{
+												OpenWindow.openWindow(url,"_blank");
+											}
+										]]>
+									</fx:Script>
+								</mx:Button>
+								
+							</fx:Component>
+						</mx:itemRenderer>
+					</mx:DataGridColumn>
+				</mx:columns>
+				<mx:dataProvider>
+					<fx:Array>
+						<fx:Object name="监理合同协议" wh="穗水**号" fwrq="2014-03-29"  url="assets/other/baogao.doc"/>
+						<fx:Object name="会议纪要" wh="穗水**号" fwrq="2014-03-29"  url="assets/other/baogao.doc"/>
+						<fx:Object name="质量检测、抽查记录" wh="穗水**号" fwrq="2014-03-29"  url="assets/other/baogao.doc"/>
+					</fx:Array>
+				</mx:dataProvider>
+			</mx:DataGrid>
+		</s:NavigatorContent>
+	</mx:TabNavigator>
+</mx:TitleWindow>

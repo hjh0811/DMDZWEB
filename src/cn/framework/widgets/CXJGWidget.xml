@@ -1,0 +1,7 @@
+<?xml version="1.0" ?>
+<configuration>
+    <tree label="后台管理" showtree="false">
+        <node label="除险加固"  icon="assets/18x18/application_double.gif"  table="SK_CXJG_1"  column="工程名称:name" formtype="flex" formXML="cn/framework/widgets/UserManager/formXML/FLFGForm.xml" select="SK_CXJG_2" update="SK_CXJG_4" insert="SK_CXJG_3" del="SK_CXJG_5">
+        </node>
+    </tree>
+</configuration>

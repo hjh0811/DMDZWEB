@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:TitleWindow xmlns:fx="http://ns.adobe.com/mxml/2009" 
+				xmlns:s="library://ns.adobe.com/flex/spark" 
+				xmlns:mx="library://ns.adobe.com/flex/mx" layout="absolute" fontSize="12" width="552" height="468" showCloseButton="true" close="titlewindow1_closeHandler(event)">
+	<fx:Script>
+		<![CDATA[
+			import cn.framework.FrameContainer;
+			
+			import mx.rpc.events.ResultEvent;
+			import mx.events.CloseEvent;
+			import mx.managers.PopUpManager;
+
+
+			protected function titlewindow1_closeHandler(event:CloseEvent):void
+			{
+				// TODO Auto-generated method stub
+				PopUpManager.removePopUp(this);
+			}
+			
+			[Bindable]
+			private var _infoData:Object;
+			public  function set infoData(value:Object):void
+			{
+				FrameContainer.getInstance().serviceManager.getDataByService({t:"SK_XC2",id:value.id},resultHander,"POST");
+			}
+
+			private function resultHander(event:ResultEvent):void
+			{
+				if(event.result==null || event.result=="") return; 
+				var jsonObject:Object = JSON.parse(event.result.toString()) as Object; 
+				if(jsonObject==null || jsonObject["values"] == null) return; 	
+				var jsonValues:Array = jsonObject["values"] as Array;
+				if(jsonValues!=null && jsonValues.length > 0)
+				{
+					_infoData = jsonValues[0];
+				}
+			}
+		]]>
+	</fx:Script>
+		<s:BorderContainer width="100%" height="100%">
+			<s:Label x="28" y="26" text="巡查标题"/>
+			<s:TextInput x="85" y="21" width="410" text="{_infoData.name}" editable="false"/>
+			<s:Label x="28" y="62" text="巡查地点"/>
+			<s:TextInput x="85" y="57" width="410" text="{_infoData.wwdd}" editable="false"/>
+			<s:Label x="28" y="304" text="开始时间"/>
+			<s:Label x="289" y="304" text="结束时间"/>
+			<s:Label x="28" y="98" text="所在水库"/>
+			<s:TextInput x="85" y="94" width="410" text="{_infoData.szsk}" editable="false"/>
+			<s:Label x="28" y="132" text="巡查内容"/>
+			<s:TextArea x="86" y="132" width="410" height="151" text="{_infoData.wxnr}" editable="false"/>
+			<s:Label x="301" y="342" text="记录人"/>
+			<mx:DateField x="86" y="298.5" width="143" text="{_infoData.kssj}" editable="false"/>
+			<mx:DateField x="354" y="297.5" width="143" text="{_infoData.jssj}" editable="false"/>
+			<s:TextInput x="354" y="336" width="143" text="{_infoData.jlr}" editable="false"/>
+			<s:Label x="28" y="344" text="上报时间"/>
+			<s:TextInput x="86" y="339" width="143" text="{_infoData.sbsj}" editable="false"/>
+			<s:TextInput x="86" y="372" width="143" text="{_infoData.x}" editable="false"/>
+			<s:TextInput x="354" y="372" width="143" text="{_infoData.y}" editable="false"/>
+			<s:Label x="44" y="377" text="X坐标"/>
+			<s:Label x="305" y="377" text="Y坐标"/>
+		</s:BorderContainer>		
+</mx:TitleWindow>

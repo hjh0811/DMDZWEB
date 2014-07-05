@@ -1,0 +1,7 @@
+<?xml version="1.0" ?>
+<configuration>
+    <tree label="后台管理" showtree="false">
+        <node label="巡查记录"  icon="assets/18x18/application_double.gif"  table="SK_XC1"  column="标题:name;上报时间:sbsj" formtype="flex" formXML="cn/framework/widgets/UserManager/formXML/XCJLForm.xml" select="SK_XC2" update="SK_XC4" insert="SK_XC3" del="SK_XC5">
+        </node>
+    </tree>
+</configuration>

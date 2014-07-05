@@ -1,0 +1,192 @@
+/* CSS file */
+@namespace s "library://ns.adobe.com/flex/spark";
+@namespace mx "library://ns.adobe.com/flex/mx";
+@namespace esri "http://www.esri.com/2008/ags";
+
+.globe
+{
+	font-family:"SimSun";
+	font-size:12; 
+}
+s|Application
+{ 
+	font-family:"SimSun";
+	font-size:12; 
+}
+
+
+mx|ToolTip
+{
+	font-size:12;
+}
+
+.errorTip
+{
+	font-size:12;
+	
+}
+
+.skcxButton {
+	color:#FFFFFF;
+	icon: Embed(source="assets/main/top_skcx.png");
+	downIcon: Embed(source="assets/main/top_skcx_h.png");
+	overIcon: Embed(source="assets/main/top_skcx.png");
+	disableIcon: Embed(source="assets/main/top_skcx.png");
+	selectedIcon: Embed(source="assets/main/top_skcx_h.png");
+	skinClass: ClassReference("cn.framework.skin.MainSelectButtonSkin");
+}
+.skxcButton {
+	color:#FFFFFF;
+	icon: Embed(source="assets/main/top_skxc.png");
+	downIcon: Embed(source="assets/main/top_skxc_h.png");
+	overIcon: Embed(source="assets/main/top_skxc.png");
+	disableIcon: Embed(source="assets/main/top_skxc.png");
+	selectedIcon: Embed(source="assets/main/top_skxc_h.png");
+	skinClass: ClassReference("cn.framework.skin.MainSelectButtonSkin");
+}
+.cxjgButton {
+	color:#FFFFFF;
+	icon: Embed(source="assets/main/top_cxjg.png");
+	downIcon: Embed(source="assets/main/top_cxjg_h.png");
+	overIcon: Embed(source="assets/main/top_cxjg.png");
+	disableIcon: Embed(source="assets/main/top_cxjg.png");
+	selectedIcon: Embed(source="assets/main/top_cxjg_h.png");
+	skinClass: ClassReference("cn.framework.skin.MainSelectButtonSkin");
+}
+.flfgButton {
+	color:#FFFFFF;
+	icon: Embed(source="assets/main/top_flfg.png");
+	downIcon: Embed(source="assets/main/top_flfg_h.png");
+	overIcon: Embed(source="assets/main/top_flfg.png");
+	disableIcon: Embed(source="assets/main/top_flfg.png");
+	selectedIcon: Embed(source="assets/main/top_flfg_h.png");
+	skinClass: ClassReference("cn.framework.skin.MainSelectButtonSkin");
+}
+
+.htglButton
+{
+	color:#FFFFFF;
+	icon: Embed(source="assets/main/manager.png");
+	downIcon: Embed(source="assets/main/manager_h.png");
+	overIcon: Embed(source="assets/main/manager.png");
+	disableIcon: Embed(source="assets/main/manager.png");
+	selectedIcon: Embed(source="assets/main/manager_h.png");
+	skinClass: ClassReference("cn.framework.skin.MainSelectButtonSkin");	
+}
+
+
+
+.py {
+	color:#FFFFFF;
+	icon: Embed(source="assets/main/tool_move.png");
+	downIcon: Embed(source="assets/main/tool_move_h.png");
+	overIcon: Embed(source="assets/main/tool_move_h.png");
+	disableIcon: Embed(source="assets/main/tool_move_h.png");
+	selectedIcon: Embed(source="assets/main/tool_move_h.png");
+	skinClass: ClassReference("cn.framework.skin.MainSelectButtonSkin");
+}
+.fd {
+	color:#FFFFFF;
+	icon: Embed(source="assets/main/tool_zoom+.png");
+	downIcon: Embed(source="assets/main/tool_zoom+_h.png");
+	overIcon: Embed(source="assets/main/tool_zoom+_h.png");
+	disableIcon: Embed(source="assets/main/tool_zoom+_h.png");
+	selectedIcon: Embed(source="assets/main/tool_zoom+_h.png");
+	skinClass: ClassReference("cn.framework.skin.MainSelectButtonSkin");
+}
+
+.sx {
+	color:#FFFFFF;
+	icon: Embed(source="assets/main/tool_zoom.png");
+	downIcon: Embed(source="assets/main/tool_zoom_h.png");
+	overIcon: Embed(source="assets/main/tool_zoom_h.png");
+	disableIcon: Embed(source="assets/main/tool_zoom_h.png");
+	selectedIcon: Embed(source="assets/main/tool_zoom_h.png");
+	skinClass: ClassReference("cn.framework.skin.MainSelectButtonSkin");
+}
+
+.jl {
+	color:#FFFFFF;
+	icon: Embed(source="assets/main/tool_rule.png");
+	downIcon: Embed(source="assets/main/tool_rule_h.png");
+	overIcon: Embed(source="assets/main/tool_rule_h.png");
+	disableIcon: Embed(source="assets/main/tool_rule_h.png");
+	selectedIcon: Embed(source="assets/main/tool_rule_h.png");
+	skinClass: ClassReference("cn.framework.skin.MainSelectButtonSkin");
+}
+
+.mj {
+	color:#FFFFFF;
+	icon: Embed(source="assets/main/tool_rule2.png");
+	downIcon: Embed(source="assets/main/tool_rule2_h.png");
+	overIcon: Embed(source="assets/main/tool_rule2_h.png");
+	disableIcon: Embed(source="assets/main/tool_rule2.png");
+	selectedIcon: Embed(source="assets/main/tool_rule2_h.png");
+	skinClass: ClassReference("cn.framework.skin.MainSelectButtonSkin");
+}
+
+.qc {
+	color:#FFFFFF;
+	icon: Embed(source="assets/main/tool_del.png");
+	downIcon: Embed(source="assets/main/tool_del_h.png");
+	overIcon: Embed(source="assets/main/tool_del_h.png");
+	disableIcon: Embed(source="assets/main/tool_del.png");
+	selectedIcon: Embed(source="assets/main/tool_del_h.png");
+	skinClass: ClassReference("cn.framework.skin.MainSelectButtonSkin");
+}
+
+/*
+.dy {
+	color:#FFFFFF;
+	icon: Embed(source="assets/main/tool_print.png");
+	downIcon: Embed(source="assets/main/tool_print_h.png");
+	overIcon: Embed(source="assets/main/tool_print_h.png");
+	disableIcon: Embed(source="assets/main/tool_print.png");
+	selectedIcon: Embed(source="assets/main/tool_print_h.png");
+	skinClass: ClassReference("cn.framework.skin.MainSelectButtonSkin");
+}
+
+
+
+.fp {
+	color:#FFFFFF;
+	icon: Embed(source="assets/main/tool_change.png");
+	downIcon: Embed(source="assets/main/tool_change_h.png");
+	overIcon: Embed(source="assets/main/tool_change_h.png");
+	disableIcon: Embed(source="assets/main/tool_change.png");
+	selectedIcon: Embed(source="assets/main/tool_change_h.png");
+	skinClass: ClassReference("cn.framework.skin.MainSelectButtonSkin");
+}*/
+
+.qp {
+	color:#FFFFFF;
+	icon: Embed(source="assets/main/tool_retunefull.png");
+	downIcon: Embed(source="assets/main/tool_retunefull_h.png");
+	overIcon: Embed(source="assets/main/tool_retunefull_h.png");
+	disableIcon: Embed(source="assets/main/tool_retunefull.png");
+	selectedIcon: Embed(source="assets/main/tool_retunefull_h.png");
+	skinClass: ClassReference("cn.framework.skin.MainSelectButtonSkin");
+}
+
+/*
+.cxbutton {
+	color:#FFFFFF;
+	icon: Embed(source="assets/main/btn_search_h.jpg");
+	downIcon: Embed(source="assets/main/btn_search.jpg");
+	overIcon: Embed(source="assets/main/btn_search_h.jpg");
+	disableIcon: Embed(source="assets/main/btn_search.jpg");
+	selectedIcon: Embed(source="assets/main/btn_search.jpg");
+	skinClass: ClassReference("cn.framework.skin.MainSelectButtonSkin");
+}*/
+
+.layerswicth
+{
+	color:#FFFFFF;
+	icon: Embed(source="assets/images/check_off.png");
+	downIcon: Embed(source="assets/images/check_on.png");
+	overIcon: Embed(source="assets/images/check_off.png");
+	disableIcon: Embed(source="assets/images/check_off.png");
+	selectedIcon: Embed(source="assets/images/check_on.png");
+	skinClass: ClassReference("cn.framework.skin.MainSelectButtonSkin");
+}
+

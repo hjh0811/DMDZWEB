@@ -1,0 +1,25 @@
+<?xml version="1.0" ?>
+<configuration  xmlns:s="library://ns.adobe.com/flex/spark" xmlns:mx="library://ns.adobe.com/flex/mx" width="1010" height="600">
+	<form width="520" useMap="true">
+			<s:Label x="28" y="26" text="巡查标题"/>
+			<s:TextInput x="85" y="21" width="410" text="name"/>
+			<s:Label x="28" y="62" text="巡查地点"/>
+			<s:TextInput x="85" y="57" width="410" text="wwdd"/>
+			<s:Label x="28" y="304" text="开始时间"/>
+			<s:Label x="289" y="304" text="结束时间"/>
+			<s:Label x="28" y="98" text="所在水库"/>
+			<s:TextInput x="85" y="94" width="410" text="szsk"/>
+			<s:Label x="28" y="132" text="巡查内容"/>
+			<s:TextArea x="86" y="132" width="410" height="151" text="wxnr"/>
+			<s:Label x="301" y="342" text="记录人"/>
+			<mx:DateField x="86" y="298.5" width="143" text="wxkssj"/>
+			<mx:DateField x="354" y="297.5" width="143" text="wxjssj"/>
+			<s:TextInput x="354" y="336" width="143" text="jlr"/>
+			<s:Label x="28" y="344" text="上报时间"/>
+			<mx:DateField x="86" y="339" width="143" text="sbsj"/>
+			<s:TextInput x="86" y="372" width="143" text="x"/>
+			<s:TextInput x="354" y="372" width="143" text="y"/>
+			<s:Label x="44" y="377" text="X坐标"/>
+			<s:Label x="305" y="377" text="Y坐标"/>
+	</form>
+</configuration>

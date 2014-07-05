@@ -1,0 +1,96 @@
+<?xml version="1.0" ?>
+<configuration  xmlns:s="library://ns.adobe.com/flex/spark" xmlns:mx="library://ns.adobe.com/flex/mx" width="1024" height="600">
+	<form width="520" useMap="true">
+			<s:Label text="工程名称" x="82" y="17"/>
+			<s:TextInput width="352" text="gcmc" x="142" y="12"/>
+			<s:TextInput width="75" text="xzq"  x="142" y="41"/>
+			<s:Label text="所在乡镇" x="227" y="46"/>
+			<s:Label text="所在区域" x="82" y="46"/>
+			<s:TextInput width="75" text="zhen"  x="284" y="41"/>
+			<s:Label text="所在村" x="371" y="46"/>
+			<s:TextInput width="75" text="cun"  x="418" y="41"/>
+			<s:Label text="溢洪道净宽(m)" x="297" y="411">
+			</s:Label>
+			<s:Label text="堰顶高程(m)" x="61" y="383">
+			</s:Label>
+			<s:Label text="坝体型式" x="330" y="355">
+			</s:Label>
+			<s:Label text="正常蓄水位(m)" x="49" y="355">
+			</s:Label>
+			<s:Label text="坝顶高程(m)" x="61" y="327">
+			</s:Label>
+			<s:Label text="最大坝高(m)" x="309" y="327">
+			</s:Label>
+			<s:TextInput width="100" text="sshgdmcc" x="143" y="294"/>
+			<s:Label text="输水涵管断面尺寸(m)"  x="13" y="299">
+			</s:Label>
+			<s:Label text="输水涵管长度(m)"  x="285" y="299">
+			</s:Label>
+			<s:Label text="溢洪道型式"  x="70" y="270">
+			</s:Label>
+			<s:Label text="溢洪道闸门型式" x="294" y="270">
+			</s:Label>
+			<s:Label text="校核洪水位(m)" x="49" y="241">
+			</s:Label>
+			<s:Label text="设计洪水位(m)" x="297" y="241">
+			</s:Label>
+			<s:Label text="设计洪水标准(P%)" x="275" y="214">
+			</s:Label>
+			<s:Label text="校核洪水标准(P%)" x="27" y="214">
+			</s:Label>
+			<s:TextInput width="100" text="xlkr" x="143" y="180"/>
+			<s:Label text="兴利库容(万m3)" x="41" y="185">
+			</s:Label>
+			<s:Label text="集雨面积(Km2)" x="293" y="185">
+			</s:Label>
+			<s:Label text="总库容(万m3)" x="53" y="157">
+			</s:Label>
+			<s:Label text="正常库容(万m3)" x="289" y="157">
+			</s:Label>
+			<s:Label text="除险加固实施年份" x="34" y="130">
+			</s:Label>
+			<s:Label text="小计宗数(宗)" x="60" y="102">
+			</s:Label>
+			<s:Label text="设计洪水位下泄流量"  x="270" y="130">
+			</s:Label>
+			<s:Label text="校核洪水位下泄流量" x="270" y="102">
+			</s:Label>
+			<s:Label text="坝顶长度(m)"  x="61" y="74"/>
+			<s:Label text="坝顶宽度(m)"  x="309" y="74">
+			</s:Label>
+			<s:TextInput width="100" text="bdcd" x="143" y="69"/>
+			<s:TextInput width="100" text="xjzs" x="143" y="97"/>
+			<s:TextInput width="100" text="bdkd" x="393" y="69"/>
+			<s:TextInput width="100" text="jhhswxsll" x="393" y="97"/>
+			<s:TextInput width="100" text="cxjgssnf" x="143" y="125"/>
+			<s:TextInput width="100" text="sjhswssll" x="393" y="125"/>
+			<s:TextInput width="100" text="zckr" x="393" y="152"/>
+			<s:TextInput width="100" text="zkr" x="143" y="152"/>
+			<s:TextInput width="100" text="jymj" x="393" y="180"/>
+			<s:TextInput width="100"  text="sjhsbz" x="393" y="209"/>
+			<s:TextInput width="100" text="jhhsbz" x="143" y="209"/>
+			<s:TextInput width="100" text="jhhsw" x="143" y="236"/>
+			<s:TextInput width="100" text="yhdxs" x="143" y="265"/>
+			<s:TextInput width="100" text="sjhsw" x="393" y="236"/>
+			<s:TextInput width="100" text="yhdzmxs" x="393" y="265"/>
+			<s:TextInput width="100" text="sshgcd" x="393" y="294"/>
+			<s:TextInput width="100" text="bdgc" x="143" y="322"/>
+			<s:TextInput width="100" text="zcxsw"  x="143" y="350"/>
+			<s:TextInput width="100" text="ydgc" x="143" y="378"/>
+			<s:TextInput width="100" text="ssjzwxs" x="143" y="406"/>
+			<s:Label text="输水建筑物型式"  x="46" y="411">
+			</s:Label>
+			<s:TextInput width="100" text="zdbg" x="393" y="322"/>
+			<s:TextInput width="100" text="btxs"  x="393" y="350"/>
+			<s:TextInput width="100" text="yhdjk" x="393" y="406"/>
+			<s:TextInput width="351" text="bz" x="143" y="466" height="45"/>
+			<s:Label text="备注" x="106" y="466">
+			</s:Label>
+			<s:TextInput width="100" text="sszmxs" x="143" y="435"/>
+			<s:Label text="输水闸门型式"  x="58" y="440">
+			</s:Label>
+			<s:TextInput width="100" text="ggmj" x="393" y="378"/>
+			<s:Label text="灌溉面积(亩)" x="308" y="383">
+			</s:Label>
+	</form>
+</configuration>

@@ -1,0 +1,9 @@
+<?xml version="1.0" ?> 
+<configuration  xmlns:s="library://ns.adobe.com/flex/spark" xmlns:mx="library://ns.adobe.com/flex/mx"  width="1024" height="550">
+	<form width="980"  useMap="false">
+			<s:Label x="33" y="31" text="名称"/>
+			<s:TextInput x="72" y="26" width="890" text="name" height="22" />
+			<s:TextArea x="72" y="60" height="390" width="890" text="content" />
+			<s:Label x="33" y="60" text="内容"/>
+	</form>
+</configuration>
