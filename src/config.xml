@@ -9,20 +9,21 @@
 	    <layer id="dt" url="http://218.15.41.59:8719/wmts/sg_gz_map/Default/epsg:4610/" showtype="base" type="wmts" visible="true"></layer>
 	    <layer id="yx" url="http://218.15.41.59:8719/wmts/sg_gz_image_map/Default/epsg:4610/" showtype="base" type="wmts" visible="false"></layer>
 	    <layer id="zj" url="http://218.15.41.59:8719/wmts/sg_gz_image_zj/Default/epsg:4610/" showtype="base" type="wmts" visible="false"></layer>
-
-	    <layer id="ddzh_featurelayer" name="水库" url="servlet/dataexchange?t=SK_LOAD" showtype="check"  type="database" visible="true" icon="assets/images/i_hydro.png" iconwidth="20" iconheight="20"></layer>
+	    <!-- <layer id="ddzh_featurelayer" name="水库" url="servlet/dataexchange?t=SK_LOAD" showtype="check"  type="database" visible="true" icon="assets/images/i_hydro.png" iconwidth="20" iconheight="20"></layer>
 	    <layer id="infoPop_YJ_featurelayer" name="水库预警" url="assets/YBPDK.json" showtype="check" type="infoPop" visible="false" namefield="ZHLX" contentfield="ZHDD" icon="assets/images/i_pin2.png" iconwidth="20" iconheight="20"/>
 	    <layer id="infoPop_DZZHYHD_featurelayer" name="水雨情遥测" url="assets/DZZHYHD.json" showtype="check" type="infoPop" visible="false" namefield="ZHLX" contentfield="ZHDD" icon="assets/images/i_flag_WSK.png" iconwidth="20" iconheight="20"/>
 	    <layer id="infoPop_SP_featurelayer" name="视频检测点" url="assets/JSGCGHXK.json" showtype="check" type="infoPop" visible="false" namefield="ZHLX" contentfield="ZHDD" icon="assets/buttons/i_camera.png" iconwidth="20" iconheight="20"/>
+    	 -->
     </layers>
 	    
 	<querylayers>
 	    <!-- 政务外网 -->
-	    <querylayer name="水库" displayname="水库" querytype="database"  namefield="gcmc" contentfield="xzq" icon="assets/main/left_searchlist_icon.png" iconwidth="21" iconheight="20"
-	        url="servlet/dataexchange?t=SK_QUERY" resume="水库名称:gcmc;行政区:xzq;总库容(万m3):zkr;正常库容(万m3):zckr" labelwidth="100" formXML="1">
-	        <queryfield displayname="名称" name="gcmc"></queryfield>
+	    <querylayer name="地名地址" displayname="地名地址" querytype="database"  namefield="name" contentfield="addname" icon="assets/main/left_searchlist_icon.png" iconwidth="21" iconheight="20"
+	        url="servlet/dataexchange?t=DM_QUERY" resume="地址名称:addname;地址简称:name;地址分类:clasname" labelwidth="60" formXML="1">
+	        <queryfield displayname="地址名称" name="addname"></queryfield>
 	    </querylayer>
-	    <querylayer name="地名地址" displayname="地名地址" querytype="newmap" namefield="NAME" contentfield="ADDNAME" icon="assets/main/left_searchlist_icon.png" iconwidth="21" iconheight="20"
+	    
+	    <querylayer name="地名" displayname="地名" querytype="newmap" namefield="NAME" contentfield="ADDNAME" icon="assets/main/left_searchlist_icon.png" iconwidth="21" iconheight="20"
 	        url="http://218.15.41.59:8719/NewMapServer/WebServices/FeatureServer.php?layer=RHDMDZ2000">
 	        <queryfield displayname="名称" name="NAME"></queryfield>
 	        <queryfield displayname="地址" name="ADDNAME"></queryfield>

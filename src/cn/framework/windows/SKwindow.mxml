@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <mx:TitleWindow xmlns:fx="http://ns.adobe.com/mxml/2009" 
 				xmlns:s="library://ns.adobe.com/flex/spark" 
-				xmlns:mx="library://ns.adobe.com/flex/mx" title="水库信息"  width="716" creationComplete="titlewindow1_creationCompleteHandler(event)" height="572" verticalScrollPolicy="off" fontSize="12" showCloseButton="true" close="PopUpManager.removePopUp(this)">
+				xmlns:mx="library://ns.adobe.com/flex/mx" title="水库信息"  width="530" creationComplete="titlewindow1_creationCompleteHandler(event)" height="430" verticalScrollPolicy="off" fontSize="12" showCloseButton="true" close="PopUpManager.removePopUp(this)">
 	<fx:Script>
 		<![CDATA[
 			import cn.framework.FrameContainer;
@@ -32,7 +32,7 @@
 			protected function titlewindow1_creationCompleteHandler(event:FlexEvent):void
 			{
 				// TODO Auto-generated method stub
-				FrameContainer.getInstance().serviceManager.getDataByService({t:"SK_XC1"},dataSKHandler,"POST");
+//				FrameContainer.getInstance().serviceManager.getDataByService({t:"DMDZ_1"},dataSKHandler,"POST");
 			}
 			
 			private function dataSKHandler(event:ResultEvent):void
@@ -57,185 +57,40 @@
 			}
 
 
-			protected function datagrid1_doubleClickHandler(event:MouseEvent):void
-			{
-				// TODO Auto-generated method stub
-				var xcwindow:XCWindow = PopUpManager.createPopUp(this.parentApplication.parent,XCWindow,true) as XCWindow;
-				PopUpManager.centerPopUp(xcwindow);
-				xcwindow.infoData = (event.currentTarget as DataGrid).selectedItem;
-			}
+//			protected function datagrid1_doubleClickHandler(event:MouseEvent):void
+//			{
+//				// TODO Auto-generated method stub
+//				var xcwindow:XCWindow = PopUpManager.createPopUp(this.parentApplication.parent,XCWindow,true) as XCWindow;
+//				PopUpManager.centerPopUp(xcwindow);
+//				xcwindow.infoData = (event.currentTarget as DataGrid).selectedItem;
+//			}
 
 		]]>
 	</fx:Script>
 	<fx:Declarations>
 		<!-- 将非可视元素（例如服务、值对象）放在此处 -->
 	</fx:Declarations>
-	<mx:TabNavigator width="100%" height="100%">
-		<s:NavigatorContent width="100%" height="100%" label="基本信息">
 			<s:Group x="10" y="10" width="100%" height="100%">
-				<s:Label text="工程名称" x="82" y="17"/>
-				<s:TextInput width="508" text="{_infoData.gcmc}" x="142" y="12"/>
-				<s:TextInput width="117" text="{_infoData.xzq}"  x="142" y="41"/>
-				<s:Label text="所在乡镇" x="285" y="46"/>
-				<s:Label text="所在乡镇" x="82" y="46"/>
-				<s:TextInput width="121" text="{_infoData.zhen}"  x="342" y="41"/>
-				<s:Label text="所在村" x="483" y="46"/>
-				<s:TextInput width="121" text="{_infoData.cun}"  x="529" y="41"/>
-				<s:Label text="溢洪道净宽(m)" x="376" y="411">
-				</s:Label>
-				<s:Label text="堰顶高程(m)" x="61" y="383">
-				</s:Label>
-				<s:Label text="坝体型式" x="409" y="355">
-				</s:Label>
-				<s:Label text="正常蓄水位(m)" x="49" y="355">
-				</s:Label>
-				<s:Label text="坝顶高程(m)" x="61" y="327">
-				</s:Label>
-				<s:Label text="最大坝高(m)" x="388" y="327">
-				</s:Label>
-				<s:TextInput width="178" text="{_infoData.sshgdmcc}" x="143" y="294"/>
-				<s:Label text="输水涵管断面尺寸(m)"  x="13" y="299">
-				</s:Label>
-				<s:Label text="输水涵管长度(m)"  x="364" y="299">
-				</s:Label>
-				<s:Label text="溢洪道型式"  x="70" y="270">
-				</s:Label>
-				<s:Label text="溢洪道闸门型式" x="373" y="270">
-				</s:Label>
-				<s:Label text="校核洪水位(m)" x="49" y="241">
-				</s:Label>
-				<s:Label text="设计洪水位(m)" x="376" y="241">
-				</s:Label>
-				<s:Label text="设计洪水标准(P%)" x="354" y="214">
-				</s:Label>
-				<s:Label text="校核洪水标准(P%)" x="27" y="214">
-				</s:Label>
-				<s:TextInput width="178" text="{_infoData.xlkr}" x="143" y="180"/>
-				<s:Label text="兴利库容(万m3)" x="41" y="185">
-				</s:Label>
-				<s:Label text="集雨面积(Km2)" x="372" y="185">
-				</s:Label>
-				<s:Label text="总库容(万m3)" x="53" y="157">
-				</s:Label>
-				<s:Label text="正常库容(万m3)" x="368" y="157">
-				</s:Label>
-				<s:Label text="除险加固实施年份" x="34" y="130">
-				</s:Label>
-				<s:Label text="小计宗数(宗)" x="60" y="102">
-				</s:Label>
-				<s:Label text="设计洪水位下泄流量"  x="349" y="130">
-				</s:Label>
-				<s:Label text="校核洪水位下泄流量" x="349" y="102">
-				</s:Label>
-				<s:Label text="坝顶长度(m)"  x="61" y="74"/>
-				<s:Label text="坝顶宽度(m)"  x="388" y="74">
-				</s:Label>
-				<s:TextInput width="178" text="{_infoData.bdcd}" x="143" y="69"/>
-				<s:TextInput width="178" text="{_infoData.xjzs}" x="143" y="97"/>
-				<s:TextInput width="178" text="{_infoData.bdkd}" x="472" y="69"/>
-				<s:TextInput width="178" text="{_infoData.jhhswxsll}" x="472" y="97"/>
-				<s:TextInput width="178" text="{_infoData.cxjgssnf}" x="143" y="125"/>
-				<s:TextInput width="178" text="{_infoData.sjhswssll}" x="472" y="125"/>
-				<s:TextInput width="178" text="{_infoData.zckr}" x="472" y="152"/>
-				<s:TextInput width="178" text="{_infoData.zkr}" x="143" y="152"/>
-				<s:TextInput width="178" text="{_infoData.jymj}" x="472" y="180"/>
-				<s:TextInput width="178"  text="{_infoData.sjhsbz}" x="472" y="209"/>
-				<s:TextInput width="178" text="{_infoData.jhhsbz}" x="143" y="209"/>
-				<s:TextInput width="178" text="{_infoData.jhhsw}" x="143" y="236"/>
-				<s:TextInput width="178" text="{_infoData.yhdxs}" x="143" y="265"/>
-				<s:TextInput width="178" text="{_infoData.sjhsw}" x="472" y="236"/>
-				<s:TextInput width="178" text="{_infoData.yhdzmxs}" x="472" y="265"/>
-				<s:TextInput width="178" text="{_infoData.sshgcd}" x="472" y="294"/>
-				<s:TextInput width="178" text="{_infoData.bdgc}" x="143" y="322"/>
-				<s:TextInput width="178" text="{_infoData.zcxsw}"  x="143" y="350"/>
-				<s:TextInput width="178" text="{_infoData.ydgc}" x="143" y="378"/>
-				<s:TextInput width="178" text="{_infoData.ssjzwxs}" x="143" y="406"/>
-				<s:Label text="输水建筑物型式"  x="46" y="411">
-				</s:Label>
-				<s:TextInput width="178" text="{_infoData.zdbg}" x="472" y="322"/>
-				<s:TextInput width="178" text="{_infoData.btxs}"  x="472" y="350"/>
-				<s:TextInput width="178" text="{_infoData.yhdjk}" x="472" y="406"/>
-				<s:TextInput width="178" text="{_infoData.sszmxs}" x="143" y="435"/>
-				<s:Label text="输水闸门型式"  x="58" y="440">
-				</s:Label>
-				<s:TextInput width="178" text="{_infoData.ggmj}" x="472" y="378"/>
-				<s:Label text="灌溉面积(亩)" x="387" y="383">
-				</s:Label>
+				<s:Label x="47" y="101" text="地址简称"/>
+				<s:TextInput x="107" y="96" width="382" text="{_infoData.name}"/>
+				<s:Label x="47" y="24" text="地址名称"/>
+				<s:TextInput x="107" y="19" width="382" text="{_infoData.addname}"/>
+				<s:Label x="23" y="259" text="地址收集时间"/>
+				<s:Label x="261" y="259" text="地址命名时间"/>
+				<s:Label x="47" y="61" text="地址编码"/>
+				<s:TextInput x="107" y="56" width="382" text="{_infoData.codename}"/>
+				<s:Label x="23" y="183" text="地址分类代码"/>
+				<mx:TextInput x="107" y="253.5" width="143" text="{_infoData.coldate}"/>
+				<mx:TextInput x="346" y="253.5" width="143" text="{_infoData.namedate}"/>
+				<s:Label x="23" y="301" text="停止使用时间"/>
+				<s:TextInput x="107" y="216" width="143" text="{_infoData.x}"/>
+				<s:TextInput x="346" y="216" width="143" text="{_infoData.y}"/>
+				<s:Label x="71" y="221" text="经度"/>
+				<s:Label x="309" y="221" text="纬度"/>
+				<mx:TextInput x="107" y="296" width="143" text="{_infoData.enddate}"/>
+				<s:Label x="23" y="142" text="地址分类名称"/>
+				<s:TextInput x="107" y="137" width="382" text="{_infoData.clasid}"/>
+				<s:TextInput x="107" y="178" width="382" text="{_infoData.clasname}"/>
 			</s:Group>
-		</s:NavigatorContent>
-		<s:NavigatorContent width="100%" height="100%" label="视频监控">
-			<s:VideoPlayer width="100%" height="100%" autoPlay="true" loop="true" source="assets/M4H05371~1.mp4">
-				
-			</s:VideoPlayer>
-		</s:NavigatorContent>
-		<s:NavigatorContent width="100%" height="100%" label="年报信息">
-			<mx:DataGrid width="100%" height="100%" dataProvider="{this.yearArray}">
-				<mx:columns>
-					<mx:DataGridColumn headerText="标题" dataField="title"/>
-					<mx:DataGridColumn headerText="时间" dataField="datetime"/>
-					<mx:DataGridColumn width="70" headerText="操作">
-						<mx:itemRenderer>
-							<fx:Component>
-								<mx:Button label="打开" click="open(data.url)">
-									<fx:Script>
-										<![CDATA[
-											import cn.framework.utils.OpenWindow;
-											protected function open(url:String):void
-											{
-												OpenWindow.openWindow(url,"_blank");
-											}
-										]]>
-									</fx:Script>
-								</mx:Button>
-							</fx:Component>
-						</mx:itemRenderer>
-					</mx:DataGridColumn>
-				</mx:columns>
-			</mx:DataGrid>
-		</s:NavigatorContent>
-		<s:NavigatorContent width="100%" height="100%" label="巡查信息">
-			<mx:DataGrid width="100%" height="100%" dataProvider="{recAC}" doubleClickEnabled="true" doubleClick="datagrid1_doubleClickHandler(event)">
-				<mx:columns>
-					<mx:DataGridColumn headerText="标题" dataField="title"/>
-					<mx:DataGridColumn headerText="时间" dataField="content"/>
-				</mx:columns>
-			</mx:DataGrid>
-		</s:NavigatorContent>
-		<s:NavigatorContent width="100%" height="100%" label="图形信息">
-			<mx:DataGrid width="100%" height="100%">
-				<mx:columns>
-					<mx:DataGridColumn headerText="标题" dataField="name"/>
-					<mx:DataGridColumn headerText="时间" dataField="2014-03-29"/>
-					<mx:DataGridColumn width="70" headerText="操作">
-						<mx:itemRenderer>
-							<fx:Component>
-								<mx:Button label="打开" click="openurl(data.url)">
-									<fx:Script>
-										<![CDATA[
-											import cn.framework.utils.OpenWindow;
-											protected function openurl(url:String):void
-											{
-												// TODO Auto-generated method stub
-												OpenWindow.openWindow(url,"_blank");	
-											}
-										]]>
-									</fx:Script>
-								</mx:Button>
-							</fx:Component>
-						</mx:itemRenderer>
-					</mx:DataGridColumn>
-				</mx:columns>
-				
-				<mx:dataProvider>
-					<fx:Array>
-						<fx:Object name="全景图" wh="穗水**号" fwrq="2014-03-29" url="assets/other/BYS0036.swf"/>
-						<fx:Object name="大坝纵剖面图" wh="穗水**号" fwrq="2014-03-29" url="cadviewer.html"/>
-						<fx:Object name="大坝横断面图" wh="穗水**号" fwrq="2014-03-29" url="cadviewer.html"/>
-						<fx:Object name="建筑物结构图" wh="穗水**号" fwrq="2014-06-29" url="cadviewer.html"/>
-					</fx:Array>
-				</mx:dataProvider>
-			</mx:DataGrid>
-		</s:NavigatorContent>
-	</mx:TabNavigator>
 
 </mx:TitleWindow>

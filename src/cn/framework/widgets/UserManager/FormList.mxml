@@ -28,6 +28,10 @@
 			
 			[Bindable]
 			private var canEditable:Boolean = false;
+			
+			[Bindable]
+			private var showEditButton:Boolean = false;
+
 			private var formType:String = "flex";
 			[Bindable]
 			private var columns:Array;
@@ -57,12 +61,19 @@
 					var dataColumn:DataGridColumn = new DataGridColumn;
 					dataColumn.headerText = fieldStr.split(":")[0];
 					dataColumn.dataField = fieldStr.split(":")[1];
+					dataColumn.dataTipField = fieldStr.split(":")[1];
+					dataColumn.showDataTips = true;
 					columns.push(dataColumn);
 				}
 				
 				if(_configXML.@formXML!=null && _configXML.@formXML!="")
 				{
 					canEditable = true;
+					
+					if(_configXML.@update!=null && _configXML.@update!="")
+					{
+						this.showEditButton = true;
+					}
 				}
 				
 				formType = _configXML.@formtype;
@@ -258,18 +269,19 @@
 			{
 				moveAction.yTo = 100;
 				
-				if(_configXML.@label == "除险加固")
-				{
-					var gcfileWindow:GCFileWidget = new GCFileWidget;
-					PopUpManager.addPopUp(gcfileWindow,this.parentApplication.parent,true);
-					
-					gcfileWindow.bindingObj = obj;
-					PopUpManager.centerPopUp(gcfileWindow);
-				}
-				else
-				{
+//				if(_configXML.@label == "快照管理")
+//				{
+////					var gcfileWindow:GCFileWidget = new GCFileWidget;
+////					PopUpManager.addPopUp(gcfileWindow,this.parentApplication.parent,true);
+////					
+////					gcfileWindow.bindingObj = obj;
+////					PopUpManager.centerPopUp(gcfileWindow);
+//					var snapshot:ImageSnapshot =  ImageSnapshot.captureImage(FrameContainer.getInstance().map);
+//				}
+//				else
+//				{
 					var form:Form = new Form;
-					PopUpManager.addPopUp(form,this.parentApplication.parent,true);
+					PopUpManager.addPopUp(form,this.parentApplication.parent,true,null,this.moduleFactory);
 					form.width = this.formXML.@width;
 					form.height = this.formXML.@height;
 					PopUpManager.centerPopUp(form);
@@ -278,7 +290,7 @@
 	
 					form.getFormData(obj.id,_configXML);
 					form.addEventListener("Reflash", reflashHandler);
-				}
+//				}
 				
 //				moveAction.play([form]);
 			}
@@ -322,7 +334,7 @@
 			</s:backgroundFill>
 			<s:HGroup includeInLayout="{canEditable}" visible="{canEditable}">
 					<mx:Button label="新增" icon="@Embed('assets/buttons/add.png')" click="newForm(event)"/>
-					<mx:Button label="编辑" icon="@Embed('assets/buttons/list.png')" click="edit()"/>
+					<mx:Button label="编辑" icon="@Embed('assets/buttons/list.png')" click="edit()" visible="{showEditButton}" includeInLayout="{showEditButton}"/>
 					<mx:Button label="删除" icon="@Embed('assets/buttons/delete.png')" click="deleteRecord()"/>
 			</s:HGroup>
 			<mx:DataGrid id="dataGrid" dataProvider="{this.values}" columns="{this.columns}" width="100%" height="100%" doubleClick="edit()" doubleClickEnabled="true">

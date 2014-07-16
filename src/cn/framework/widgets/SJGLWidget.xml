@@ -1,0 +1,9 @@
+<?xml version="1.0" ?>
+<configuration>
+    <tree label="数据管理" showtree="true">
+        <node label="数据管理"  icon="assets/18x18/application_double.gif"  table="DMDZ_1"  column="地址名称:addname;地址编码:codename;地理简称:name;经度:x;纬度:y" formtype="flex" formXML="cn/framework/widgets/UserManager/formXML/DMDZForm.xml" select="DMDZ_2" update="DMDZ_4" insert="DMDZ_3" del="DMDZ_5">
+        </node>
+        <node label="在线更新"  icon="assets/18x18/application_double.gif"  table="DMDZ_1"  column="地址名称:addname;地址编码:codename;地理简称:name;经度:x;纬度:y" formtype="update" formXML="cn/framework/widgets/UserManager/formXML/DMDZForm.xml" select="DMDZ_2" update="DMDZ_4" insert="DMDZ_3" del="DMDZ_5">
+        </node> 
+    </tree>
+</configuration>

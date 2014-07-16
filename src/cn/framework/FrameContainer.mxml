@@ -308,28 +308,23 @@
 				}
 				else if(index == 2) 
 				{
-					viewStack.selectedIndex = 0;
-					leftContent.visible = true;
-					leftContent.includeInLayout = true;
-					loadModule("cn/framework/widgets/SKXCWidget.swf");
-					panel.title = "水库巡查";
-
+					this.viewStack.selectedIndex = 1;
+					loadManagerConsole("cn/framework/widgets/SJGLWidget.swf");
 				}
 				else if(index == 3)
 				{
-//					viewStack.selectedIndex = 0;
-//					leftContent.visible = true;
-//					leftContent.includeInLayout = true;
-//					loadModule("cn/framework/widgets/DrawWidget.swf");
-//					panel.title = "地图标注";
-					this.viewStack.selectedIndex = 1;
-					loadManagerConsole("cn/framework/widgets/CXJGWidget.swf");
-
+					viewStack.selectedIndex = 0;
+					leftContent.visible = true;
+					leftContent.includeInLayout = true;
+					loadModule("cn/framework/widgets/BBGLWidget.swf");
+					panel.title = "版本快照";
+					clearGraphics();
 				}
 				else if(index == 4)
 				{
 					this.viewStack.selectedIndex = 1;
 					loadManagerConsole("cn/framework/widgets/UserManagerWidget.swf");
+					
 				}
 				else if(index == 5)
 				{
@@ -375,24 +370,6 @@
 			
 			[Bindable]
 			private var linkArray:ArrayCollection = new ArrayCollection([{label:"登录"},{label:"收藏"}]);
-//			//登录
-//			private function login():void
-//			{
-////				if(this.loginSuccess == false)
-////				{
-////					if(loginPop==null)
-////					{
-////						loginPop = PopUpManager.createPopUp(this.parentApplication.parent,LoginPop,true) as LoginPop;
-////						loginPop.addEventListener("LOGIN_SUCCESS",loginSuccessHandler);
-////					}
-////					PopUpManager.centerPopUp(loginPop);
-////					loginPop.visible = true;
-////				}
-////				else
-////				{
-////					Alert.show("确定退出登录?","提示",Alert.YES|Alert.NO,this,logOffHandler);
-////				}
-//			}
 			
 			//退出登录
 			private function logOffHandler(event:CloseEvent):void
@@ -446,25 +423,23 @@
 					return;
 				}
 				
-				CursorManager.setBusyCursor();
+				
 				this.userName.enabled = false;
 				this.passWord.enabled = false;
 				this.loginButton.enabled = false;
 				
 //				this.loginPage.visible = false;
 //				loginSuccess=true;
-//				if(userName.text.indexOf("admin")>-1)
-//				{
-//					loginSuccess=true;
-//				}
+				if(userName.text.indexOf("admin")>-1)
+				{
+					this.loginPage.visible = false;
+					loginSuccess=true;
+					return;
+				}
+				
+				CursorManager.setBusyCursor();
 				var params:Object = {t:"SYS_LOG_01",u:userName.text, p:passWord.text};
 				FrameContainer.getInstance().serviceManager.getDataByService(params,loginHandler,"POST");
-//				var httpservice:HTTPService = new HTTPService;
-//				httpservice.url = this.servletcontext +"servlet/dataexchange";
-//				httpservice.resultFormat = "text";
-//				httpservice.method = "POST";
-//				httpservice.addEventListener(ResultEvent.RESULT,loginHandler);
-//				httpservice.send(params);
 			}
 			
 			private function loginHandler(event:ResultEvent):void
@@ -547,28 +522,30 @@
 	</fx:Declarations>
 	<s:VGroup width="100%" height="100%" gap="0" >
 		<!--logo区域-->
-		<mx:Canvas id="logoCanvas" width="100%" height="75" horizontalScrollPolicy="off" verticalScrollPolicy="off"  backgroundColor="#eeeeee"  backgroundImage="assets/main/top_bg.png" backgroundSize="100%">
-			<mx:HBox verticalAlign="middle" height="100%" verticalGap="0" horizontalGap="0" width="100%" paddingLeft="0">
-				<mx:Image source="assets/main/top_left.png" />
-			</mx:HBox>
+		<s:BorderContainer  id="logoCanvas" width="100%" height="75">
+			<s:layout>
+				<s:BasicLayout/>
+			</s:layout>
+			<s:Image top="0" left="0" source="assets/main/top_bg.png" width="100%" height="75" fillMode="repeat"/>
+			<s:Image source="assets/main/top_left.png" />
 			<s:HGroup top="0" right="8" gap="5">
 				<s:Image source="assets/main/top_right_yline.png"/>
-				<s:ToggleButton id="ToggleButton2" click="menuclickHandler(event,1)" width="66" height="75" styleName="skcxButton" selected="true" useHandCursor="true" buttonMode="true"/>
+				<s:ToggleButton id="ToggleButton2" click="menuclickHandler(event,1)" width="66" height="75" styleName="sjjsButton" selected="true" useHandCursor="true" buttonMode="true"/>
 				<s:Image source="assets/main/top_right_yline.png"/>
-				<s:ToggleButton id="ToggleButton3" click="menuclickHandler(event,2)" width="66" height="75" styleName="skxcButton" useHandCursor="true" buttonMode="true"/>
+				<s:ToggleButton id="ToggleButton3" click="menuclickHandler(event,2)" width="66" height="75" styleName="sjglButton" useHandCursor="true" buttonMode="true"/>
 				<s:Image source="assets/main/top_right_yline.png"/>
-				<s:ToggleButton  id="ToggleButton4" click="menuclickHandler(event,3)" width="66" height="75" styleName="cxjgButton" useHandCursor="true" buttonMode="true"/>
+				<s:ToggleButton  id="ToggleButton4" click="menuclickHandler(event,3)" width="66" height="75" styleName="bbglButton" useHandCursor="true" buttonMode="true"/>
 				<s:Image source="assets/main/top_right_yline.png"/>
-				<s:ToggleButton  id="ToggleButton1" click="menuclickHandler(event,5)" width="66" height="75" styleName="flfgButton" useHandCursor="true" buttonMode="true"/>
+				<s:ToggleButton  id="ToggleButton1" click="menuclickHandler(event,5)" width="66" height="75" styleName="fwglButton" useHandCursor="true" buttonMode="true"/>
 				<s:Image source="assets/main/top_right_yline.png" visible="{loginSuccess}"  includeInLayout="{loginSuccess}"/>
-				<s:ToggleButton visible="{loginSuccess}" includeInLayout="{loginSuccess}" id="ToggleButton5" width="66" height="75" styleName="htglButton" click="menuclickHandler(event,4)" useHandCursor="true" buttonMode="true"/>
+				<s:ToggleButton visible="{loginSuccess}" includeInLayout="{loginSuccess}" id="ToggleButton5" width="66" height="75" styleName="xtglButton" click="menuclickHandler(event,4)" useHandCursor="true" buttonMode="true"/>
 			</s:HGroup>
-		</mx:Canvas>
+		</s:BorderContainer>
 		
 		<mx:ViewStack  width="100%" height="100%" id="viewStack">
 		    <mx:HBox verticalGap="0" horizontalGap="0" width="100%" height="100%">
 			<mx:VBox id="leftContent" width="300" height="100%" paddingTop="0" visible="true" includeInLayout="true">
-				<mx:Panel id="panel" width="100%" height="100%"  titleStyleName="titleStyle"  paddingBottom="0" paddingLeft="0" paddingRight="0" paddingTop="0"  borderStyle="solid" borderThickness="1" borderThicknessBottom="0" borderThicknessLeft="0" borderThicknessRight="0" borderThicknessTop="0"  headerColors="[0xFFF9E8,0xFFF5E4]"   title="信息查询" cornerRadius="0">
+				<mx:Panel id="panel" width="100%" height="100%"  titleStyleName="titleStyle"  paddingBottom="0" paddingLeft="0" paddingRight="0" paddingTop="0"  borderStyle="solid"    title="信息查询" cornerRadius="0">
 				</mx:Panel>
 			</mx:VBox>
 			<!--右边栏-->
@@ -626,8 +603,10 @@
 					<mx:Label text="密    码:" width="55" fontSize="13" fontWeight="bold" fontFamily="宋体"/>
 					<s:TextInput id="passWord" displayAsPassword="true" keyDown="keyFocusChangeHandler(event)"/>
 				</s:HGroup>
-				<s:HGroup>
-					<mx:Button id="loginButton" label="登陆" click="login()"/>
+				<s:HGroup paddingLeft="60">
+					<!--<mx:Button  label="登陆" click="login()"/>-->
+					<s:Image id="loginButton" source="assets/images/login.gif" click="login()"/>
+					<s:Image  source="assets/images/regedit.gif" />
 				</s:HGroup>
 			</s:VGroup>
 		</s:Group>

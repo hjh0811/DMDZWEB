@@ -5,9 +5,5 @@
         </node>
         <node label="日志监控"  icon="assets/18x18/application_double.gif"  table="SYS_RZJK"  column="IP地址:ip;访问时间:createtime;操作:cz" formtype="flex" formXML="" >
         </node>
-        <node label="数据管理" icon="assets/18x18/application_cascade.gif" clickable="false">
-            <node label="水库" icon="assets/18x18/application_view_gallery.gif"  table="SK_11"  column="水库名称:gcmc;行政区:xzq;除险加固实施年份:cxjgssnf;X坐标:x;Y坐标:y" formtype="flex"  formXML="cn/framework/widgets/UserManager/formXML/SKForm.xml" select="SK_12" update="SK_14" insert="SK_13" del="SK_15"/>
-        </node>
-
     </tree>
 </configuration>

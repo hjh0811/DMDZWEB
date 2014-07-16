@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:TitleWindow xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		 xmlns:s="library://ns.adobe.com/flex/spark" 
+		 xmlns:mx="library://ns.adobe.com/flex/mx" width="604" height="188" close="closeWindow(event)" title="定义更新任务">
+	<fx:Script>
+		<![CDATA[
+			import mx.events.CloseEvent;
+			import mx.managers.PopUpManager;
+
+
+			protected function closeWindow(event:CloseEvent):void
+			{
+				// TODO Auto-generated method stub
+				PopUpManager.removePopUp(this);
+			}
+
+		]]>
+	</fx:Script>
+	<fx:Declarations>
+		<!-- 将非可视元素（例如服务、值对象）放在此处 -->
+	</fx:Declarations>
+	<s:ComboBox x="90" y="17" width="147">
+		<s:dataProvider>
+			<s:ArrayList>
+				<fx:String>百度地图POI</fx:String>
+				<fx:String>高德POI</fx:String>
+				<fx:String>天地图POI</fx:String>
+				<fx:String>Google地图POI</fx:String>
+			</s:ArrayList>
+		</s:dataProvider>
+	</s:ComboBox>
+	<s:Label x="27" y="22.5" text="更新源"/>
+	<s:ComboBox x="90" y="62.5" width="107">
+		<s:dataProvider>
+			<s:ArrayList>
+				<fx:String>广州市</fx:String>
+				<fx:String>深圳市</fx:String>
+				<fx:String>珠海市</fx:String>
+				<fx:String>汕头市</fx:String>
+				<fx:String>韶关市</fx:String>
+				<fx:String>河源市</fx:String>
+			</s:ArrayList>
+		</s:dataProvider>
+	</s:ComboBox>
+	<s:Label x="27" y="68" text="更新区域"/>
+	<s:ComboBox x="236" y="62.5" width="107">
+
+	</s:ComboBox>
+	<s:ComboBox x="404" y="62.5" width="107"/>
+	<s:Label x="205" y="68" text="市"/>
+	<s:Label x="351" y="68" text="区/县"/>
+	<s:Label x="519" y="68" text="镇/街道"/>
+	<s:Label x="27" y="113" text="更新类别"/>
+	<s:ComboBox x="90" y="107.5">
+		<s:dataProvider>
+			<s:ArrayList>
+				<fx:String>酒店</fx:String>
+			</s:ArrayList>
+		</s:dataProvider>
+	</s:ComboBox>
+</s:TitleWindow>

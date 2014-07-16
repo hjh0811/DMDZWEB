@@ -1102,7 +1102,7 @@
 			<esri:EditTool id="editTool" map="{map}"/>
 			<esri:DrawTool id="drawTool" drawEnd="map_drawEndHandler(event)" map="{map}" snapMode="alwaysOn" snapOption="edgeAndVertex"/> 
 		</fx:Declarations>
-	<mx:Panel id="panel" width="100%" height="100%" titleStyleName="titleStyle" headerHeight="0"  paddingBottom="0" paddingLeft="0" paddingRight="0" paddingTop="0"  borderStyle="solid" borderThickness="1" borderThicknessBottom="0" borderThicknessLeft="0" borderThicknessRight="0" borderThicknessTop="0" headerColors="[0xFFF9E8,0xFFF5E4]"   title="地图标注" cornerRadius="0">
+	<mx:Panel id="panel" width="100%" height="100%" titleStyleName="titleStyle" headerHeight="0"  paddingBottom="0" paddingLeft="0" paddingRight="0" paddingTop="0"  borderStyle="solid"    title="地图标注" cornerRadius="0">
 
 		<s:VGroup width="100%" height="100%" paddingTop="30"
 				  gap="2">

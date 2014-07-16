@@ -4,6 +4,4 @@
 			   xmlns:mx="library://ns.adobe.com/flex/mx" skinClass="cn.framework.skin.AppSkin"  width="100%" fontSize="12" height="100%" xmlns:framework="cn.framework.*" >
 	<fx:Style source="default.css"/>
 	<framework:FrameContainer/>
-	<mx:TitleWindow width="20" height="20" visible="false"/>
-	<s:TextInput visible="false"/>
 </s:Application>

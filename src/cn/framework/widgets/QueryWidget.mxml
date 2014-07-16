@@ -151,7 +151,7 @@
 				var httpservice:HTTPService = new HTTPService;
 				pageWhereURL = FrameContainer.getInstance().serviceManager.servletcontext + layerXML.@url;
 				httpservice.url = pageWhereURL;
-				m_QueryParamObj = {gcmc:queryText.text};
+				m_QueryParamObj = {addname:queryText.text};
 				httpservice.resultFormat = "text";
 				httpservice.method = "POST";
 				httpservice.addEventListener(ResultEvent.RESULT,queryDataBasehandler);

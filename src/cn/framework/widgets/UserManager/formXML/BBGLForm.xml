@@ -1,0 +1,9 @@
+<?xml version="1.0" ?> 
+<configuration  xmlns:s="library://ns.adobe.com/flex/spark" xmlns:mx="library://ns.adobe.com/flex/mx" width="900" height="500">
+	<form width="420"  useMap="false" isUpload="true">
+			<s:Label x="32" y="31" text="快照名称"/>
+			<s:TextInput x="90" y="26" width="310" text="name"/>
+			<s:Label x="44" y="62" text="版本号"/>
+			<s:TextInput x="90" y="57" width="310" text="version"/>
+	</form>
+</configuration>

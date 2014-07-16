@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:TitleWindow xmlns:fx="http://ns.adobe.com/mxml/2009" 
+			   xmlns:s="library://ns.adobe.com/flex/spark" 
+			   xmlns:mx="library://ns.adobe.com/flex/mx"  width="100%" height="100%" close="titlewindow1_closeHandler(event)">
+	<fx:Declarations>
+		<!-- 将非可视元素（例如服务、值对象）放在此处 -->
+	</fx:Declarations>
+	<fx:Script>
+		<![CDATA[
+			import cn.framework.FrameContainer;
+			
+			import mx.events.CloseEvent;
+			import mx.events.ListEvent;
+			import mx.managers.PopUpManager;
+			[Bindable]
+			private var _jsonValue:Array;
+			
+			public function set jsonValue(value:Array):void
+			{
+				_jsonValue = value;
+				
+				this.datagrid.dataProvider = _jsonValue;
+				if(_jsonValue!=null &&_jsonValue.length >0)
+				{
+					this.datagrid.selectedIndex = 0;
+					this.img.source = FrameContainer.getInstance().serviceManager.servletcontext + "/files/" + _jsonValue[0]["id"] + ".jpg";
+				}
+			}
+
+			protected function datagrid1_changeHandler(event:ListEvent):void
+			{
+				// TODO Auto-generated method stub
+				var obj:Object = this.datagrid.selectedItem;
+				this.img.source = FrameContainer.getInstance().serviceManager.servletcontext + "/files/" + obj["id"] + ".jpg";
+			}
+
+
+			protected function titlewindow1_closeHandler(event:CloseEvent):void
+			{
+				// TODO Auto-generated method stub
+				PopUpManager.removePopUp(this);
+			}
+
+		]]>
+	</fx:Script>
+	<s:HGroup width="100%" height="100%">
+		<mx:DataGrid  id="datagrid" width="250" height="100%" dataProvider="{_jsonValue}" change="datagrid1_changeHandler(event)">
+			<mx:columns>
+				<mx:DataGridColumn headerText="快照名称" dataField="name"/>
+				<mx:DataGridColumn headerText="快照版本" dataField="version"/>
+			</mx:columns>
+		</mx:DataGrid>
+		<s:Image id="img" width="100%" height="100%"/>
+	</s:HGroup>
+	
+</s:TitleWindow>

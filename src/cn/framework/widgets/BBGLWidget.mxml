@@ -1,0 +1,226 @@
+<?xml version="1.0" encoding="utf-8"?>
+<framework:BaseWidget xmlns:fx="http://ns.adobe.com/mxml/2009" xmlns:framework="cn.framework.*"
+					  xmlns:s="library://ns.adobe.com/flex/spark" creationComplete="init()" fontSize="12"
+					  xmlns:mx="library://ns.adobe.com/flex/mx"  width="100%" height="100%" xmlns:UserManager="cn.framework.widgets.UserManager.*" xmlns:esri="http://www.esri.com/2008/ags">
+	<fx:Script>
+		<![CDATA[
+			import cn.framework.FrameContainer;
+			
+			import com.esri.ags.symbols.PictureMarkerSymbol;
+			
+			import cn.framework.components.treeview.render.IconItemRender;
+			import cn.framework.utils.IconUtility;
+			import cn.framework.widgets.UserManager.FormList;
+			import cn.framework.windows.KZTitleWindow;
+			
+			import com.esri.ags.Graphic;
+			import com.esri.ags.events.TimeExtentEvent;
+			import com.esri.ags.geometry.MapPoint;
+			import com.esri.ags.layers.GraphicsLayer;
+			
+			import mx.charts.chartClasses.DataDescription;
+			import mx.controls.Alert;
+			import mx.events.FlexEvent;
+			import mx.events.ListEvent;
+			import mx.formatters.DateFormatter;
+			import mx.managers.PopUpManager;
+			import mx.rpc.events.ResultEvent;
+			import mx.rpc.http.HTTPService;
+			
+			[Bindable]
+			private var showtree:Boolean = false;
+			private var graphicslayer:GraphicsLayer = new GraphicsLayer;
+			
+			protected function init():void
+			{
+				// TODO Auto-generated method stub
+				var httpservice:HTTPService = new HTTPService;
+				httpservice.url = "cn/framework/widgets/BBGLWidget.xml";
+				httpservice.resultFormat = "e4x";
+				httpservice.method = "GET";
+				httpservice.addEventListener(ResultEvent.RESULT, configHandler);
+				httpservice.send();
+				
+				this.map.addLayer(graphicslayer);
+			}
+			
+			[Bindable]
+			private var treeXml:XML;
+			private function configHandler(event:ResultEvent):void
+			{
+				var xml:XML = event.result as XML;
+				treeXml = XML(xml.tree);
+				
+				showtree = treeXml.@showtree == "true" ? true: false ;
+				
+				if(showtree==true)  //是否显示树
+				{
+					tree.dataProvider = treeXml;
+					tree.callLater(expandTree);
+					tree.selectedIndex = 0;
+				}
+				
+				var formlist:FormList = new FormList;
+				this.borderContainer.addElement(formlist);
+				formlist.configXML = XML(xml.tree.node[0]);
+			}
+			
+			
+			private function expandTree():void{  
+				tree.expandChildrenOf(treeXml , true);  
+			}
+			
+			
+			protected function tree_changeHandler(event:ListEvent):void
+			{
+				// TODO Auto-generated method stub
+				
+			}
+			
+			
+			private var formList:FormList;
+			protected function tree_itemClickHandler(event:ListEvent):void
+			{
+				// TODO Auto-generated method stub
+				var item:Object = event.currentTarget.selectedItem;
+				var nonSelectable:Boolean = ((item.hasOwnProperty("@clickable")) && (item.(@clickable == "false")));
+				if (nonSelectable) {
+					tree.selectedItem = null;
+				}
+				
+				if(tree.selectedItem!=null)
+				{
+					var xml:XML = tree.selectedItem as XML;
+					//					borderContainer.removeAllElements();
+					
+					
+					var table:String = xml.@table;
+					if(table == null ||　table=="") return;
+					
+					if(formList==null)
+					{
+						formList = new FormList;
+						borderContainer.addElement(formList);
+					}
+					formList.configXML = xml;
+				}
+			}
+			
+
+			protected function readKZ(event:MouseEvent):void
+			{
+				FrameContainer.getInstance().serviceManager.getDataByService({t:"DMDZ_BBGL1"},KZdataResultHandler,"POST");
+			}
+
+			private function KZdataResultHandler(event:ResultEvent):void
+			{
+				if(event.result==null || event.result=="") return; 
+				var jsonObject:Object = JSON.parse(event.result.toString()) as Object; 
+				if(jsonObject==null) return; 	
+				
+				var jsonValues:Array =  jsonObject["values"];
+				
+				var kzwindow:KZTitleWindow = new KZTitleWindow;
+				PopUpManager.addPopUp(kzwindow,this.parentApplication.parent,true);
+				kzwindow.height = this.parentApplication.parent.height;
+				kzwindow.width = this.parentApplication.parent.width;
+				kzwindow.jsonValue = jsonValues;
+			}
+			
+			private function hisRecord():void
+			{
+				FrameContainer.getInstance().serviceManager.getDataByService({t:"DMDZ_1"},HisDataHandler,"POST");
+			}
+			
+			private var dateFormater:DateFormatter = new DateFormatter;
+			private var dateDictionary:Dictionary
+			private function HisDataHandler(event:ResultEvent):void
+			{
+				if(event.result==null || event.result=="") return; 
+				var jsonObject:Object = JSON.parse(event.result.toString()) as Object; 
+				if(jsonObject==null) return; 	
+				
+				var jsonValues:Array =  jsonObject["values"];
+				
+				dateDictionary = new Dictionary;
+				var stops:Array = new Array;
+				for each(var obj:Object in jsonValues)
+				{
+					var newdate:Date = DateFormatter.parseDateString(obj.namedate);
+					
+					dateFormater.formatString = "YYYY-MM-DD";
+					var dateStr:String = dateFormater.format(newdate);
+					var ptArray:Array;
+					if(dateDictionary[dateStr]==null)
+					{
+						ptArray = new Array;
+						stops.push(DateFormatter.parseDateString(dateStr));
+						dateDictionary[dateStr] = ptArray;
+					}
+					else
+					{
+						ptArray = dateDictionary[dateStr];
+					}
+					var pt:MapPoint = new MapPoint(obj["x"],obj["y"]);
+					ptArray.push(pt);
+				}
+				timeSlider.visible = true;
+				timeSlider.timeStops = stops;
+				timeSlider.play();
+			}
+
+			protected function timeSlider_timeExtentChangeHandler(event:TimeExtentEvent):void
+			{
+				// TODO Auto-generated method stub
+				dateFormater.formatString = "YYYY-MM-DD";
+				var dateStr:String = dateFormater.format(event.timeExtent.endTime);
+				graphicslayer.clear();
+				if(dateStr!=null && dateStr!="")
+				{
+					var ptArray:Array = dateDictionary[dateStr];
+					if(ptArray!=null && ptArray.length>0)
+					{
+						for each(var pt:MapPoint in ptArray)
+						{
+							var pointgraphic:Graphic = new Graphic;
+							pointgraphic.geometry = pt;
+							pointgraphic.symbol= new PictureMarkerSymbol("assets/images/p2.png",20,21);
+							graphicslayer.add(pointgraphic);
+						}
+					}
+				}
+			}
+
+		]]>
+	</fx:Script>
+	<fx:Declarations>
+		<!-- 将非可视元素（例如服务、值对象）放在此处 -->
+	</fx:Declarations>
+	<s:BorderContainer width="100%" height="100%" top="5">
+		<s:layout>
+			<s:VerticalLayout gap="3" horizontalAlign="center"/>
+		</s:layout>
+		<mx:HDividedBox width="100%" height="50%">
+			<mx:VBox width="250" height="100%" visible="{this.showtree}" includeInLayout="{this.showtree}">
+				<mx:Tree id="tree" width="100%"  height="100%" labelField="@label" showRoot="false" itemClick="tree_itemClickHandler(event)" change="tree_changeHandler(event)"
+						 itemRenderer="cn.framework.components.treeview.render.IconItemRender" >
+					
+				</mx:Tree>
+			</mx:VBox>
+			<s:BorderContainer id="borderContainer" width="100%" height="100%" borderStyle="solid" borderVisible="false">
+				<s:backgroundFill>
+					<s:SolidColor 
+						alpha="0"/> 
+				</s:backgroundFill>
+			</s:BorderContainer>	
+		</mx:HDividedBox>	
+		<s:VGroup width="100%" height="50%" paddingLeft="3" paddingRight="5" gap="20">
+			<s:HGroup>
+				<mx:Button label="快照浏览" icon="@Embed('assets/buttons/list.png')" click="readKZ(event)"/>
+				<mx:Button label="历史回溯" icon="@Embed('assets/buttons/list.png')" click="hisRecord()"/>
+			</s:HGroup>
+			<esri:TimeSlider id="timeSlider" width="230" visible="false" timeExtentChange="timeSlider_timeExtentChangeHandler(event)" />
+		</s:VGroup>
+	</s:BorderContainer>
+
+</framework:BaseWidget>

@@ -62,7 +62,7 @@
 			
 			private function mouseClickHandler(event:MouseEvent):void
 			{
-				var detailForm:SKwindow = PopUpManager.createPopUp(this.parentApplication.parent,SKwindow,false) as SKwindow;
+				var detailForm:SKwindow = PopUpManager.createPopUp(this.parentApplication.parent,SKwindow,false,null,this.moduleFactory) as SKwindow;
 				PopUpManager.centerPopUp(detailForm);
 				detailForm.infoData = this._infoData.attributes;
 			}

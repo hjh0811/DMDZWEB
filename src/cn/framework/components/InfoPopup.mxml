@@ -212,7 +212,7 @@
 //                infoData = null;
 //				this.map.removeChild(this);
 //				this.visible = false;
-				var video:VideoWindow = PopUpManager.createPopUp(this.parentApplication.parent,VideoWindow,true) as VideoWindow;
+				var video:VideoWindow = PopUpManager.createPopUp(this.parentApplication.parent,VideoWindow,true,null,this.moduleFactory) as VideoWindow;
 				video.title = this._infoData.title;
 				PopUpManager.centerPopUp(video);
             }

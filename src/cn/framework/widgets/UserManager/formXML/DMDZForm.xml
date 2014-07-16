@@ -1,0 +1,25 @@
+<?xml version="1.0" ?>
+<configuration  xmlns:s="library://ns.adobe.com/flex/spark" xmlns:mx="library://ns.adobe.com/flex/mx" width="1000" height="560">
+	<form width="500" useMap="true">
+			<s:Label x="47" y="101" text="地址简称"/>
+			<s:TextInput x="107" y="96" width="382" text="name"/>
+			<s:Label x="47" y="24" text="地址名称"/>
+			<s:TextInput x="107" y="19" width="382" text="addname"/>
+			<s:Label x="23" y="259" text="地址收集时间"/>
+			<s:Label x="261" y="259" text="地址命名时间"/>
+			<s:Label x="47" y="61" text="地址编码"/>
+			<s:TextInput x="107" y="56" width="382" text="codename"/>
+			<s:Label x="23" y="183" text="地址分类代码"/>
+			<mx:DateField x="107" y="253.5" width="143" text="coldate"/>
+			<mx:DateField x="346" y="253.5" width="143" text="namedate"/>
+			<s:Label x="23" y="301" text="停止使用时间"/>
+			<s:TextInput x="107" y="216" width="143" text="x"/>
+			<s:TextInput x="346" y="216" width="143" text="y"/>
+			<s:Label x="71" y="221" text="经度"/>
+			<s:Label x="309" y="221" text="纬度"/>
+			<mx:DateField x="107" y="296" width="143" text="enddate"/>
+			<s:Label x="23" y="142" text="地址分类名称"/>
+			<s:TextInput x="107" y="137" width="382" text="clasid"/>
+			<s:TextInput x="107" y="178" width="382" text="clasname"/>
+	</form>
+</configuration>

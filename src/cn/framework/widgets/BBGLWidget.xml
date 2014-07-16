@@ -1,0 +1,7 @@
+<?xml version="1.0" ?>
+<configuration>
+    <tree label="版本管理" showtree="false">
+        <node label="快照管理"  icon="assets/18x18/application_double.gif"  table="DMDZ_BBGL1"  column="快照名称:name;版本号:version;创建时间:createtime" formtype="flex" formXML="cn/framework/widgets/UserManager/formXML/BBGLForm.xml" select="DMDZ_BBGL2" update="" insert="DMDZ_BBGL3" del="DMDZ_BBGL4">
+        </node>
+    </tree>
+</configuration>

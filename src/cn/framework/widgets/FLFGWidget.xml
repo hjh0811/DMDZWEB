@@ -1,7 +1,13 @@
 <?xml version="1.0" ?>
 <configuration>
-    <tree label="后台管理" showtree="false">
-        <node label="法律法规"  icon="assets/18x18/application_double.gif"  table="SK_FLFA_1"  column="法律法规:name" formtype="flex" formXML="cn/framework/widgets/UserManager/formXML/FLFGForm.xml" select="SK_FLFA_2" update="SK_FLFA_5" insert="SK_FLFA_3" del="SK_FLFA_4">
+    <tree label="服务管理" showtree="true">
+        <node label="服务注册"  icon="assets/18x18/application_double.gif"  table="SK_FLFA_1"  column="服务名称:name1;服务地址:url" formtype="flex" formXML="cn/framework/widgets/UserManager/formXML/FLFGForm.xml" select="SK_FLFA_2" update="SK_FLFA_5" insert="SK_FLFA_3" del="SK_FLFA_4">
+	    </node>
+        <node label="服务管理" icon="assets/18x18/application_double.gif">
+	        <node label="服务申请"  icon="assets/18x18/application_double.gif"  table="SK_FLFA_1"  column="服务名称:name1;服务地址:url" formtype="flex" formXML="cn/framework/widgets/UserManager/formXML/FLFGForm.xml" select="SK_FLFA_2" update="SK_FLFA_5" insert="SK_FLFA_3" del="SK_FLFA_4">
+	        </node>
+	        <node label="服务审核"  icon="assets/18x18/application_double.gif"  table="SK_FLFA_1"  column="服务名称:name1;服务地址:url" formtype="flex" formXML="cn/framework/widgets/UserManager/formXML/FLFGForm.xml" select="SK_FLFA_2" update="SK_FLFA_5" insert="SK_FLFA_3" del="SK_FLFA_4">
+	        </node>
         </node>
     </tree>
 </configuration>

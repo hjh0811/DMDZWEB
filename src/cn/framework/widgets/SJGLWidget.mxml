@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="utf-8"?>
+<framework:BaseWidget xmlns:fx="http://ns.adobe.com/mxml/2009" xmlns:framework="cn.framework.*"
+					  xmlns:s="library://ns.adobe.com/flex/spark" creationComplete="init()" fontSize="12"
+					  xmlns:mx="library://ns.adobe.com/flex/mx"  width="100%" height="100%" xmlns:UserManager="cn.framework.widgets.UserManager.*" xmlns:esri="http://www.esri.com/2008/ags" xmlns:utils="cn.framework.utils.*">
+	<fx:Script>
+		<![CDATA[
+			import cn.framework.components.treeview.render.IconItemRender;
+			
+			import mx.managers.PopUpManager;
+			
+			import cn.framework.utils.IconUtility;
+			import cn.framework.widgets.UserManager.FormList;
+			import cn.framework.windows.UpdateWindow;
+			
+			import com.esri.ags.Graphic;
+			import com.esri.ags.geometry.MapPoint;
+			import com.esri.ags.layers.GraphicsLayer;
+			import com.esri.ags.symbols.PictureMarkerSymbol;
+			
+			import mx.collections.ArrayCollection;
+			import mx.controls.Alert;
+			import mx.events.FlexEvent;
+			import mx.events.ListEvent;
+			import mx.rpc.events.ResultEvent;
+			import mx.rpc.http.HTTPService;
+			private var graphicsLayer:GraphicsLayer = new GraphicsLayer;
+			
+			protected function init():void
+			{
+				// TODO Auto-generated method stub
+				var httpservice:HTTPService = new HTTPService;
+				httpservice.url = "cn/framework/widgets/SJGLWidget.xml";
+				httpservice.resultFormat = "e4x";
+				httpservice.method = "GET";
+				httpservice.addEventListener(ResultEvent.RESULT, configHandler);
+				httpservice.send();
+				
+				this.updateMap.addLayer(graphicsLayer);
+			}
+			
+			[Bindable]
+			private var treeXml:XML;
+			private function configHandler(event:ResultEvent):void
+			{
+				var xml:XML = event.result as XML;
+				treeXml = XML(xml.tree);
+				tree.dataProvider = treeXml;
+				tree.callLater(expandTree);
+				tree.selectedIndex = 0;
+				
+				var formlist:FormList = new FormList;
+				this.borderContainer.addElement(formlist);
+				formlist.configXML = XML(xml.tree.node[0]);
+			}
+			
+			
+			private function expandTree():void{  
+				tree.expandChildrenOf(treeXml , true);  
+			}
+			
+			
+			protected function tree_changeHandler(event:ListEvent):void
+			{
+				// TODO Auto-generated method stub
+				
+			}
+			
+			
+			private var formList:FormList;
+			protected function tree_itemClickHandler(event:ListEvent):void
+			{
+				// TODO Auto-generated method stub
+				var item:Object = event.currentTarget.selectedItem;
+				var nonSelectable:Boolean = ((item.hasOwnProperty("@clickable")) && (item.(@clickable == "false")));
+				if (nonSelectable) {
+					tree.selectedItem = null;
+				}
+				
+				if(tree.selectedItem!=null)
+				{
+					var xml:XML = tree.selectedItem as XML;
+					//					borderContainer.removeAllElements();
+					
+					
+					var table:String = xml.@table;
+					if(table == null ||　table=="") return;
+					
+					var formtype:String = xml.@formtype;
+					
+					if(formtype == "update")
+					{
+						updateContainer.visible = true;
+					}
+					else
+					{
+						updateContainer.visible = false;
+						if(formList==null)
+						{
+							formList = new FormList;
+							borderContainer.addElement(formList);
+						}
+						formList.configXML = xml;
+					}
+					
+
+				}
+			}
+			
+			private var whereText:String = "酒店";
+			private function getUpdataData():void
+			{
+				var httpservice:HTTPService = new HTTPService;
+				httpservice.url ="http://api.map.baidu.com/place/v2/search?&q="+whereText+"&region=韶关&output=json&ak=34c2bbc4cd0b9d3e9348cf8d2bd4545b";
+				httpservice.method = "GET";
+				httpservice.resultFormat = "text";
+				httpservice.addEventListener(ResultEvent.RESULT,baiduResultHandler);
+				httpservice.send(null);
+			}
+			
+			[Bindable]
+			private var recAC:ArrayCollection;
+			private function baiduResultHandler(event:ResultEvent):void
+			{
+				if(event.result==null || event.result=="") return; 
+				var jsonObject:Object = JSON.parse(event.result.toString()) as Object; 
+				if(jsonObject==null) return; 
+				var jsonValues:Array = jsonObject["results"] as Array; 
+				this.recAC = new ArrayCollection;
+				graphicsLayer.clear();
+				this.map.infoWindow.hide();
+				for each(var obj:Object in jsonValues)
+				{
+					if(obj["location"]==null) break;
+					var graphic:Graphic = new Graphic;
+					
+					graphic.geometry = new MapPoint(obj["location"]["lng"],obj["location"]["lat"]);
+					graphic.symbol = new PictureMarkerSymbol("assets/images/p2.png",32,32);
+					var infoData:Object={name: obj["name"], //设备名称
+						icon: "assets/images/p2.png", x: obj["location"]["lng"], //标题
+						y: obj["location"]["lat"], //字段内容
+						point: graphic.geometry, //位置点
+							geometry:graphic
+					};
+					graphic.attributes = infoData;
+					this.graphicsLayer.add(graphic);
+					this.recAC.addItem(infoData);
+				}
+			}
+			
+			private function sendUpate():void
+			{
+				Alert.show("确定提交更新数据","提示",Alert.OK|Alert.CANCEL,this.parentApplication.parent,closeHandler);
+			}
+			
+			private function closeHandler(event:Event):void
+			{
+				
+			}
+			
+			private var updateWindow:UpdateWindow;
+			protected function updateCase(event:MouseEvent):void
+			{
+				// TODO Auto-generated method stub
+				if(updateWindow==null)
+					updateWindow = new UpdateWindow;
+				PopUpManager.addPopUp(updateWindow,this.parentApplication.parent,true,null,this.moduleFactory);
+				PopUpManager.centerPopUp(updateWindow);
+			}
+
+		]]>
+	</fx:Script>
+	<fx:Declarations>
+		<!-- 将非可视元素（例如服务、值对象）放在此处 -->
+	</fx:Declarations>
+	<mx:HDividedBox width="100%" height="100%">
+		<mx:VBox width="250" height="100%">
+			<mx:Tree id="tree" width="100%"  height="100%" labelField="@label" showRoot="false" itemClick="tree_itemClickHandler(event)" change="tree_changeHandler(event)"
+					 itemRenderer="cn.framework.components.treeview.render.IconItemRender" >
+				
+			</mx:Tree>
+		</mx:VBox>
+		<s:Group width="100%" height="100%">
+			<s:BorderContainer id="borderContainer" width="100%" height="100%" borderStyle="solid">
+				<s:backgroundFill>
+					<s:SolidColor 
+						alpha="0"/> 
+				</s:backgroundFill>
+			</s:BorderContainer>	
+			<s:BorderContainer id="updateContainer" width="100%" height="100%" borderStyle="solid" visible="false">
+				<s:VGroup width="100%" height="100%" paddingLeft="3" paddingRight="3" paddingBottom="3" paddingTop="3">
+					<s:HGroup width="100%">
+						<mx:Button label="定义更新源" icon="@Embed('assets/buttons/folderOpen.gif')" />
+						<mx:Button label="定义更新任务" icon="@Embed('assets/buttons/folderOpen.gif')" click="updateCase(event)" />
+						<mx:Button label="获取更新" icon="@Embed('assets/buttons/list.png')" click="getUpdataData()"/>
+						<mx:Button label="提交更新" icon="@Embed('assets/buttons/layer.png')" click="sendUpate()"/>
+					</s:HGroup>
+					<s:HGroup width="100%" height="100%">
+						<s:DataGrid width="100%" height="100%" dataProvider="{recAC}">
+							<s:columns>
+								<s:ArrayList>  
+									<s:GridColumn dataField="name" headerText="地址名称"></s:GridColumn>  
+									<s:GridColumn dataField="x" headerText="经度"></s:GridColumn>  
+									<s:GridColumn dataField="y" headerText="纬度"></s:GridColumn>  
+								</s:ArrayList>
+							</s:columns>
+						</s:DataGrid>
+						<s:BorderContainer width="100%" height="100%" borderStyle="inset">
+							<esri:Map id="updateMap" logoVisible="false" width="100%" height="100%">
+								<utils:WMTSLayer baseUrl="http://218.15.41.59:8719/wmts/sg_gz_map/Default/epsg:4610/">
+									
+								</utils:WMTSLayer>
+							</esri:Map>
+						</s:BorderContainer>
+					</s:HGroup>
+				</s:VGroup>
+			</s:BorderContainer>
+		</s:Group>
+	</mx:HDividedBox>
+</framework:BaseWidget>

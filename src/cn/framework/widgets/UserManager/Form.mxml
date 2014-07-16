@@ -21,10 +21,16 @@
 			import mx.controls.Label;
 			import mx.controls.TextArea;
 			import mx.controls.TextInput;
+			import mx.core.IFlexDisplayObject;
+			import mx.graphics.ImageSnapshot;
+			import mx.graphics.codec.JPEGEncoder;
 			import mx.managers.PopUpManager;
 			import mx.rpc.events.ResultEvent;
 			import mx.rpc.http.HTTPService;
 			import mx.utils.ObjectUtil;
+			
+			import spark.layouts.HorizontalAlign;
+			import spark.layouts.VerticalAlign;
 
 			private var bindingUtil:BindingUtil = new BindingUtil;
 			[Bindable]
@@ -35,6 +41,8 @@
 			
 			[Bindable]
 			private var isUserMap:Boolean = true;
+			[Bindable]
+			private var isUpload:Boolean = false;
 			
 			public function getFormData(objectID:String, configXML:XML):void
 			{
@@ -87,6 +95,7 @@
 				
 			}
 			
+			private var snapshot:ImageSnapshot;
 			//生成表单界面 以及绑定数据
 			private function createForm():void
 			{
@@ -96,6 +105,10 @@
 //					this.container.height = this.m_formXML.form.@height;
 					
 					this.isUserMap = this.m_formXML.form.@useMap == "true"? true: false;
+					this.isUpload = this.m_formXML.form.@isUpload == "true"? true: false;
+					mapContent.visible = this.isUserMap;
+					mapContent.includeInLayout = this.isUserMap;
+					map.visible = this.isUserMap;
 					
 					var s:Namespace = new Namespace("library://ns.adobe.com/flex/spark");
 					var mx:Namespace = new Namespace("library://ns.adobe.com/flex/mx");
@@ -196,6 +209,13 @@
 						
 						this.map.centerAt(pt);
 					}
+					
+					
+					if(isUpload)
+					{
+						snapshot =  ImageSnapshot.captureImage(FrameContainer.getInstance().map);
+						uploadImg.source = snapshot.data;
+					}
 				}
 			}
 			
@@ -216,8 +236,39 @@
 			
 			private function saveDataHandler(event:ResultEvent):void
 			{
-				Alert.show("保存成功");
+				if(event.result==null || event.result=="") return; 
+				var jsonObject:Object = JSON.parse(event.result.toString()) as Object; 
+				if(jsonObject==null)
+				{
+					Alert.show("保存失败");
+					return; 	
+				}
+				bindingObj.id =  jsonObject["id"];
+					
+				if(isUpload)
+				{
+					if(m_Model == "new")
+					{
+						var req:URLRequest = new URLRequest();
+						req.method = URLRequestMethod.POST;
+						req.data = snapshot.data;
+						req.contentType="application/octet-stream";
+						req.url = FrameContainer.getInstance().serviceManager.servletcontext + "servlet/uploadimg?o=upload&id=" + bindingObj.id;
+						var loader:URLLoader = new URLLoader;
+						loader.addEventListener(Event.COMPLETE,upLoadCompleteHandler);
+						loader.load(req);
+					}
+				}
+				else
+					Alert.show("保存成功");
+				
+				m_Model = "edit";
 				this.dispatchEvent(new Event("Reflash"));
+			}
+			
+			private function upLoadCompleteHandler(event:Event):void
+			{
+				Alert.show("保存成功");
 			}
 
 			protected function drawEndHandler(event:DrawEvent):void
@@ -275,6 +326,28 @@
 				}
 			}
 
+
+			protected function uploadImg_doubleClickHandler(event:MouseEvent):void
+			{
+				// TODO Auto-generated method stub
+
+				
+//				var hgroup:HGroup = new HGroup;
+//				hgroup.percentHeight = 100;
+//				hgroup.percentWidth = 100;
+//				hgroup.horizontalAlign = HorizontalAlign.CENTER;
+//				hgroup.verticalAlign = VerticalAlign.MIDDLE;
+//				PopUpManager.addPopUp(hgroup as IFlexDisplayObject,this.parentApplication.parent,true);
+////				PopUpManager.centerPopUp(hgroup);
+//				
+//				
+//				var image:Image = new Image;
+//				image.source = this.uploadImg.source;
+////				image.percentHeight = 100;
+////				image.percentWidth = 100;/
+//				hgroup.addElement(image);
+			}
+
 		]]>
 	</fx:Script>
 	<fx:Declarations>
@@ -291,11 +364,11 @@
 				
 			</s:Group>
 		</s:BorderContainer>
-		<s:BorderContainer visible="{this.isUserMap}" includeInLayout="{this.isUserMap}" borderStyle="inset"  width="450" height="100%">
+		<s:BorderContainer id="mapContent" visible="false" includeInLayout="{this.isUserMap}" borderStyle="inset"  width="450" height="100%">
 			<s:layout>
 				<s:BasicLayout/>
 			</s:layout>
-			<esri:Map id="map" width="100%" height="100%" logoVisible="false" zoomSliderVisible="false">
+			<esri:Map id="map" width="100%" height="100%" logoVisible="false" zoomSliderVisible="false" visible="false">
 				<utils:WMTSLayer id="dt" baseUrl="http://218.15.41.59:8719/wmts/sg_gz_map/Default/epsg:4610/" visible="true"/>
 				<esri:GraphicsLayer id="graphicslayer"/>
 			</esri:Map>
@@ -305,6 +378,10 @@
 			</mx:HBox>
 			
 			<s:ToggleButton id="drawButton" icon="@Embed('assets/images/pin.png')" right="5" bottom="5" width="38"  height="36" toolTip="在地图上标注位置" click="draw(event)"/>
+		</s:BorderContainer>
+		<s:BorderContainer visible="{this.isUpload}" includeInLayout="{this.isUpload}" width="100%" height="100%">
+			<s:Image id="uploadImg" width="100%" height="100%" doubleClick="uploadImg_doubleClickHandler(event)" doubleClickEnabled="true"/>
+			<mx:Label text="版本快照"/>
 		</s:BorderContainer>
 	</s:HGroup>
 		<s:HGroup width="100%" paddingBottom="5" paddingTop="3" paddingRight="50" horizontalAlign="right" gap="20">

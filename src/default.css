@@ -26,51 +26,51 @@ mx|ToolTip
 	
 }
 
-.skcxButton {
+.sjjsButton {
 	color:#FFFFFF;
-	icon: Embed(source="assets/main/top_skcx.png");
-	downIcon: Embed(source="assets/main/top_skcx_h.png");
-	overIcon: Embed(source="assets/main/top_skcx.png");
-	disableIcon: Embed(source="assets/main/top_skcx.png");
-	selectedIcon: Embed(source="assets/main/top_skcx_h.png");
+	icon: Embed(source="assets/main/top_sjjs.png");
+	downIcon: Embed(source="assets/main/top_sjjs_h.png");
+	overIcon: Embed(source="assets/main/top_sjjs.png");
+	disableIcon: Embed(source="assets/main/top_sjjs.png");
+	selectedIcon: Embed(source="assets/main/top_sjjs_h.png");
 	skinClass: ClassReference("cn.framework.skin.MainSelectButtonSkin");
 }
-.skxcButton {
+.sjglButton {
 	color:#FFFFFF;
-	icon: Embed(source="assets/main/top_skxc.png");
-	downIcon: Embed(source="assets/main/top_skxc_h.png");
-	overIcon: Embed(source="assets/main/top_skxc.png");
-	disableIcon: Embed(source="assets/main/top_skxc.png");
-	selectedIcon: Embed(source="assets/main/top_skxc_h.png");
+	icon: Embed(source="assets/main/top_sjgl.png");
+	downIcon: Embed(source="assets/main/top_sjgl_h.png");
+	overIcon: Embed(source="assets/main/top_sjgl.png");
+	disableIcon: Embed(source="assets/main/top_sjgl.png");
+	selectedIcon: Embed(source="assets/main/top_sjgl_h.png");
 	skinClass: ClassReference("cn.framework.skin.MainSelectButtonSkin");
 }
-.cxjgButton {
+.fwglButton {
 	color:#FFFFFF;
-	icon: Embed(source="assets/main/top_cxjg.png");
-	downIcon: Embed(source="assets/main/top_cxjg_h.png");
-	overIcon: Embed(source="assets/main/top_cxjg.png");
-	disableIcon: Embed(source="assets/main/top_cxjg.png");
-	selectedIcon: Embed(source="assets/main/top_cxjg_h.png");
+	icon: Embed(source="assets/main/top_fwgl.png");
+	downIcon: Embed(source="assets/main/top_fwgl_h.png");
+	overIcon: Embed(source="assets/main/top_fwgl.png");
+	disableIcon: Embed(source="assets/main/top_fwgl.png");
+	selectedIcon: Embed(source="assets/main/top_fwgl_h.png");
 	skinClass: ClassReference("cn.framework.skin.MainSelectButtonSkin");
 }
-.flfgButton {
+.bbglButton {
 	color:#FFFFFF;
-	icon: Embed(source="assets/main/top_flfg.png");
-	downIcon: Embed(source="assets/main/top_flfg_h.png");
-	overIcon: Embed(source="assets/main/top_flfg.png");
-	disableIcon: Embed(source="assets/main/top_flfg.png");
-	selectedIcon: Embed(source="assets/main/top_flfg_h.png");
+	icon: Embed(source="assets/main/top_bbgl.png");
+	downIcon: Embed(source="assets/main/top_bbgl_h.png");
+	overIcon: Embed(source="assets/main/top_bbgl.png");
+	disableIcon: Embed(source="assets/main/top_bbgl.png");
+	selectedIcon: Embed(source="assets/main/top_bbgl_h.png");
 	skinClass: ClassReference("cn.framework.skin.MainSelectButtonSkin");
 }
 
-.htglButton
+.xtglButton
 {
 	color:#FFFFFF;
-	icon: Embed(source="assets/main/manager.png");
-	downIcon: Embed(source="assets/main/manager_h.png");
-	overIcon: Embed(source="assets/main/manager.png");
-	disableIcon: Embed(source="assets/main/manager.png");
-	selectedIcon: Embed(source="assets/main/manager_h.png");
+	icon: Embed(source="assets/main/top_xtgl.png");
+	downIcon: Embed(source="assets/main/top_xtgl_h.png");
+	overIcon: Embed(source="assets/main/top_xtgl.png");
+	disableIcon: Embed(source="assets/main/top_xtgl.png");
+	selectedIcon: Embed(source="assets/main/top_xtgl_h.png");
 	skinClass: ClassReference("cn.framework.skin.MainSelectButtonSkin");	
 }
 
